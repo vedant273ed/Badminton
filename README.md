@@ -67,8 +67,6 @@ python generate_project.py
 python -m badminton_labeler.main
 ```
 
-> ⚠️ **Important:** Always run `python -m badminton_labeler.main` from the **parent** directory — the one that *contains* the `badminton_labeler/` folder. Do not `cd` into `badminton_labeler/` first.
-
 ### 3. Basic Workflow
 
 ```
@@ -322,59 +320,11 @@ for idx, seg in enumerate(segments):
 ## 🏛️ Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                        User                             │
-│           (keyboard shortcuts / mouse clicks)           │
-└────────────────────────┬────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│              MainWindow  [FACADE]                        │
-│   • Builds widgets                                       │
-│   • Forwards events to Presenter                         │
-│   • Exposes display_frame(), refresh_segments() etc.     │
-│   • NO business logic                                    │
-└────────────────────────┬────────────────────────────────┘
-                         │ calls / receives
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│            MainPresenter  [MVP BRAIN]                    │
-│   • Owns all business logic                              │
-│   • Reads/writes AppState                                │
-│   • Fires Commands (undo/redo)                           │
-│   • Drives MarkerFSM transitions                         │
-│   • Calls Services                                       │
-│   • Tells MainWindow what to render                      │
-└──────┬──────────┬────────────┬──────────────────────────┘
-       │          │            │
-       ▼          ▼            ▼
-┌──────────┐ ┌─────────┐ ┌──────────────────────────────┐
-│AppState  │ │Command  │ │         Services               │
-│[SINGLETON│ │History  │ │  VideoService  (OpenCV)        │
-│          │ │[COMMAND]│ │  SessionService (JSON I/O)     │
-│ session  │ │         │ │  ExportContext [STRATEGY]      │
-│ markers  │ │undo[]   │ │    ├── CSVExportStrategy       │
-│ fps      │ │redo[]   │ │    ├── MP4ExportStrategy       │
-│ ...      │ │         │ │    └── JSONExportStrategy      │
-└──────────┘ └─────────┘ └──────────────────────────────┘
-       │
-       │  read/write
-       ▼
-┌─────────────────────────────────────────────────────────┐
-│                      Models                              │
-│         Segment  ←──  SegmentFactory [FACTORY]          │
-│         Session                                          │
-└─────────────────────────────────────────────────────────┘
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/e77bf7d2-eff0-4553-afa7-0f5f02847a06" />
 
-             ┌───────────────────────────┐
-             │     MarkerFSM [STATE]     │
-             │  IDLE ──→ MARK_START      │
-             │  MARK_START ──→ IDLE      │
-             │  (fires on_segment_ready) │
-             └───────────────────────────┘
 ```
 
-**Data flow in plain English:**
+**Data flow :**
 1. User presses a key → `MainWindow` catches it → calls `Presenter.mark_frame()`
 2. Presenter tells `MarkerFSM.mark(current_frame)`
 3. FSM transitions state; on second mark, fires `on_segment_ready(start, end)`
