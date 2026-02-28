@@ -7,6 +7,9 @@
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.5%2B-5C3EE8?style=flat-square&logo=opencv&logoColor=white)](https://opencv.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Architecture](https://img.shields.io/badge/Architecture-MVP%20%2B%208%20Patterns-red?style=flat-square)]()
+<img width="1194" height="773" alt="image" src="https://github.com/user-attachments/assets/3d78ba5f-1e33-40a1-bde8-2fd54de61926" />
+<img width="835" height="475" alt="image" src="https://github.com/user-attachments/assets/a46752cf-b991-4312-b9dd-16fbccdece3f" />
+<img width="376" height="477" alt="image" src="https://github.com/user-attachments/assets/54e114b6-24a5-414b-803e-41f217589e8f" />
 
 ---
 
