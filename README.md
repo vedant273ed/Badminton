@@ -319,10 +319,8 @@ for idx, seg in enumerate(segments):
 
 ## 🏛️ Architecture Overview
 
-```
-<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/e77bf7d2-eff0-4553-afa7-0f5f02847a06" />
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/0f496d32-f4e6-4958-85fc-0cc4d42b9099" />
 
-```
 
 **Data flow :**
 1. User presses a key → `MainWindow` catches it → calls `Presenter.mark_frame()`
