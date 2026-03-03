@@ -13,7 +13,8 @@ Detect court keypoints → Compute homography → Project players onto a **meter
 
 **Before** (real broadcast angle) → **After** (perfect overhead view)
 
-![Demo](https://github.com/user-attachments/assets/homography-demo.png)
+<img width="1368" height="790" alt="image" src="https://github.com/user-attachments/assets/849fe713-934f-4701-a30c-5a987403f5c7" />
+
 *(Camera view with detected players → Clean top-down court with projected positions)*
 
 ---
