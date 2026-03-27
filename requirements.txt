@@ -1,0 +1,84 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# MonoTrack — Shuttle Z-Trajectory Pipeline
+# requirements.txt
+#
+# Covers all 4 modules:
+#   module1_court_calibration.py
+#   module2_shuttle_detection.py
+#   module3_pose_estimation.py
+#   module4_trajectory.py
+#
+# Quick install (core only, CPU):
+#   pip install -r requirements.txt
+#
+# Then choose ONE pose backend:
+#   Option A — RTMPose (better accuracy, needs mmpose ecosystem):
+#     pip install -U openmim
+#     mim install mmcv "mmdet>=3.0" "mmpose>=1.0"
+#
+#   Option B — MediaPipe (CPU-only, no extra setup):
+#     pip install mediapipe>=0.10.0
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+# ── Core scientific stack ─────────────────────────────────────────────────────
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+
+
+# ── Computer vision ───────────────────────────────────────────────────────────
+# opencv-python  = standard build  (GUI windows work, needed for Module 1 GUI)
+# opencv-python-headless = no GUI  (use this on servers / CI)
+# Pick exactly ONE of the two lines below:
+opencv-python>=4.8.0
+# opencv-python-headless>=4.8.0
+
+
+# ── Module 1: interactive annotation backend ─────────────────────────────────
+# matplotlib already pulled above; it uses plt.ginput() for the click GUI.
+# No extra packages needed.
+
+
+# ── Module 2: TrackNetV3 runner ───────────────────────────────────────────────
+# TrackNetV3 is called as a subprocess via its own predict.py.
+# Its dependencies (torch, etc.) must be installed separately according to
+# your GPU / CUDA version.  The lines below cover the CPU-safe minimum that
+# most TrackNet repos expect:
+torch>=2.0.0          # TrackNetV3 inference
+torchvision>=0.15.0   # image transforms used by TrackNet
+
+
+# ── Module 3: pose estimation ─────────────────────────────────────────────────
+# Choose ONE backend.  Both are optional — the pipeline runs without either
+# (player position priors are simply disabled in Module 4).
+
+# --- Option A: RTMPose via mmpose (recommended) ---
+# Install separately with mim (NOT pip) to get correct mmcv build:
+#   pip install -U openmim
+#   mim install mmcv "mmdet>=3.0" "mmpose>=1.0"
+# These lines are here for documentation only; pip can't install them directly.
+# mmcv>=2.0.0          # managed by mim — do not pip install directly
+# mmdet>=3.0.0         # managed by mim
+# mmpose>=1.0.0        # managed by mim
+
+# --- Option B: MediaPipe (simpler, CPU-only) ---
+# Uncomment to install via pip:
+mediapipe>=0.10.0
+
+
+# ── Module 4: physics optimiser ──────────────────────────────────────────────
+# scipy already listed above (solve_ivp + minimize).
+# No additional packages needed.
+
+
+# ── Runtime utilities (transitive, pinned for reproducibility) ───────────────
+pillow>=9.0.0          # matplotlib image I/O
+packaging>=21.0        # version checks inside mmpose / torch
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Python version requirement: >= 3.10
+# (dataclasses with field(), match/case patterns, and union type hints
+#  X | Y are used in the modules)
+# ─────────────────────────────────────────────────────────────────────────────
