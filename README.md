@@ -256,13 +256,7 @@ Quality grade:       ★★★★★ Excellent
 
 ## 👥 Authors & Contributors
 
-**Core Team:**
-- [@vedant273ed](https://github.com/vedant273ed)
-- [@amrose](https://github.com/amrose) 
-- [@vrishti](https://github.com/vrishti) 
-- [@brinda](https://github.com/brinda) 
-- [@tanmay](https://github.com/tanmay) 
-- [@gaurav](https://github.com/gaurav) 
+
 
 ---
 
